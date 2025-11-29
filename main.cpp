@@ -11,7 +11,7 @@ int main() {
     int year;
 
     do {
-        cout << "\n=== Menu Utama ===\n"
+        cout << "\nMenu Utama\n"
              << "1. Kelola Buku\n"
              << "2. Kelola Anggota\n"
              << "3. Stack Buku Sementara\n"
@@ -24,7 +24,7 @@ int main() {
         switch(menu) {
         case 1:
             do {
-                cout << "\n-- Menu Buku --\n"
+                cout << "\nMenu Buku\n"
                      << "1. Tambah Buku\n"
                      << "2. Tampilkan Buku\n"
                      << "3. Cari Buku\n"
@@ -55,7 +55,7 @@ int main() {
 
         case 2:
             do {
-                cout << "\n-- Menu Anggota --\n"
+                cout << "\nMenu Anggota\n"
                      << "1. Tambah\n"
                      << "2. Tampilkan\n"
                      << "3. Cari\n"
@@ -85,7 +85,7 @@ int main() {
 
         case 3:
             do {
-                cout << "\n-- Stack --\n"
+                cout << "\nStack\n"
                      << "1. Push Buku\n"
                      << "2. Pop Buku\n"
                      << "3. Lihat Stack\n"
@@ -109,7 +109,7 @@ int main() {
 
         case 4:
             do {
-                cout << "\n-- Queue --\n"
+                cout << "\nQueue\n"
                      << "1. Tambah antrian\n"
                      << "2. Proses antrian\n"
                      << "3. Lihat antrian\n"

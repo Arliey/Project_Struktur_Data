@@ -5,7 +5,6 @@
 #include <string>
 using namespace std;
 
-// ========== Book (Double Linked List) ==========
 struct Book {
     string code;
     string title;
@@ -18,7 +17,6 @@ struct BookNode {
     BookNode* next;
 };
 
-// List Buku
 class BookList {
 public:
     BookNode* head;
@@ -32,7 +30,6 @@ public:
     void display();
 };
 
-// ========== Member (Single Linked List) ==========
 struct Member {
     string id;
     string name;
@@ -43,7 +40,6 @@ struct MemberNode {
     MemberNode* next;
 };
 
-// List Anggota
 class MemberList {
 public:
     MemberNode* head;
@@ -56,7 +52,6 @@ public:
     void display();
 };
 
-// ========== Stack Buku Sementara ==========
 struct StackNode {
     string code;
     StackNode* next;
@@ -72,7 +67,6 @@ public:
     void display();
 };
 
-// ========== Queue Peminjaman ==========
 struct QueueNode {
     string code;
     QueueNode* next;

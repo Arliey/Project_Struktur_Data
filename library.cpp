@@ -1,6 +1,5 @@
 #include "library.h"
 
-// ===== BookList Implementation =====
 BookList::BookList() { head = tail = NULL; }
 BookList::~BookList() {
     while (head) {
@@ -54,7 +53,6 @@ void BookList::display() {
     }
 }
 
-// ===== MemberList Implementation =====
 MemberList::MemberList() { head = NULL; }
 MemberList::~MemberList() {
     while (head) {
@@ -105,7 +103,6 @@ void MemberList::display() {
     }
 }
 
-// ===== Stack Implementation =====
 StackList::StackList() { top = NULL; }
 bool StackList::isEmpty() { return top == NULL; }
 
@@ -133,7 +130,6 @@ void StackList::display() {
     }
 }
 
-// ===== Queue Implementation =====
 QueueList::QueueList() { front = rear = NULL; }
 bool QueueList::isEmpty() { return front == NULL; }
 
