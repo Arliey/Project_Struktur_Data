@@ -1,139 +1,124 @@
 #include "library.h"
 
-int main() {
+int main(){
     BookList books;
     MemberList members;
     StackList stack;
     QueueList queue;
 
-    int menu, submenu;
-    string code, title, id, name;
-    int year;
+    int pil;
+    string id, name, code;
 
-    do {
-        cout << "\nMenu Utama\n"
-             << "1. Kelola Buku\n"
-             << "2. Kelola Anggota\n"
-             << "3. Stack Buku Sementara\n"
-             << "4. Queue Antrian Peminjaman\n"
-             << "0. Keluar\n"
-             << "Pilih: ";
-        cin >> menu;
-        cin.ignore();
+    while(true){
+        cout << "\n=== MENU AWAL ===\n";
+        cout << "1. Login Admin\n";
+        cout << "2. Login Member\n";
+        cout << "3. Register Member\n";
+        cout << "4. Lihat Buku\n";
+        cout << "0. Keluar\nPilih: ";
+        cin >> pil; cin.ignore();
 
-        switch(menu) {
-        case 1:
-            do {
-                cout << "\nMenu Buku\n"
-                     << "1. Tambah Buku\n"
-                     << "2. Tampilkan Buku\n"
-                     << "3. Cari Buku\n"
-                     << "4. Hapus Buku\n"
-                     << "0. Kembali\nPilih: ";
-                cin >> submenu;
-                cin.ignore();
+        if(pil == 0) break;
 
-                if (submenu == 1) {
-                    cout << "Kode: "; getline(cin, code);
-                    cout << "Judul: "; getline(cin, title);
-                    cout << "Tahun: "; cin >> year; cin.ignore();
-                    books.insertLast({code,title,year});
-                } 
-                else if (submenu == 2) books.display();
-                else if (submenu == 3) {
-                    cout << "Masukkan kode: "; getline(cin, code);
-                    if (books.search(code)) cout << "Ditemukan!\n";
-                    else cout << "Tidak ditemukan!\n";
-                }
-                else if (submenu == 4) {
-                    cout << "Masukkan kode: "; getline(cin, code);
-                    books.remove(code);
-                }
+        // ===== ADMIN =====
+        if(pil == 1){
+            string u,p;
+            cout << "Username: "; getline(cin,u);
+            cout << "Password: "; getline(cin,p);
+            if(u=="admin" && p=="admin"){
+                int a;
+                do{
+                    cout << "\n--- Admin Menu ---\n";
+                    cout << "1. Tambah Buku\n";
+                    cout << "2. Lihat Buku\n";
+                    cout << "3. Cari Buku\n";
+                    cout << "4. Hapus Buku\n";
+                    cout << "5. Lihat Semua Antrian\n";
+                    cout << "6. Proses Antrian (Dequeue)\n";
+                    cout << "0. Logout\nPilih: ";
+                    cin >> a; cin.ignore();
 
-            } while (submenu != 0);
-            break;
-
-        case 2:
-            do {
-                cout << "\nMenu Anggota\n"
-                     << "1. Tambah\n"
-                     << "2. Tampilkan\n"
-                     << "3. Cari\n"
-                     << "4. Hapus\n"
-                     << "0. Kembali\nPilih: ";
-                cin >> submenu;
-                cin.ignore();
-
-                if (submenu == 1) {
-                    cout << "ID: "; getline(cin, id);
-                    cout << "Nama: "; getline(cin, name);
-                    members.insertFirst({id,name});
-                }
-                else if (submenu == 2) members.display();
-                else if (submenu == 3) {
-                    cout << "ID cari: "; getline(cin, id);
-                    if (members.search(id)) cout << "Ditemukan!\n";
-                    else cout << "Tidak ditemukan!\n";
-                }
-                else if (submenu == 4) {
-                    cout << "ID hapus: "; getline(cin, id);
-                    members.remove(id);
-                }
-
-            } while (submenu != 0);
-            break;
-
-        case 3:
-            do {
-                cout << "\nStack\n"
-                     << "1. Push Buku\n"
-                     << "2. Pop Buku\n"
-                     << "3. Lihat Stack\n"
-                     << "0. Kembali\nPilih: ";
-                cin >> submenu;
-                cin.ignore();
-
-                if (submenu == 1) {
-                    cout << "Kode buku: "; getline(cin, code);
-                    stack.push(code);
-                }
-                else if (submenu == 2) {
-                    string result = stack.pop();
-                    if (result == "") cout << "Stack kosong.\n";
-                    else cout << "Pop: " << result << endl;
-                }
-                else if (submenu == 3) stack.display();
-
-            } while (submenu != 0);
-            break;
-
-        case 4:
-            do {
-                cout << "\nQueue\n"
-                     << "1. Tambah antrian\n"
-                     << "2. Proses antrian\n"
-                     << "3. Lihat antrian\n"
-                     << "0. Kembali\nPilih: ";
-                cin >> submenu;
-                cin.ignore();
-
-                if (submenu == 1) {
-                    cout << "Kode buku: "; getline(cin, code);
-                    queue.enqueue(code);
-                }
-                else if (submenu == 2) {
-                    string result = queue.dequeue();
-                    if (result == "") cout << "Antrian kosong.\n";
-                    else cout << "Diproses: " << result << endl;
-                }
-                else if (submenu == 3) queue.display();
-
-            } while (submenu != 0);
-            break;
+                    if(a == 1){
+                        cout << "Kode: "; getline(cin,code);
+                        cout << "Judul: "; getline(cin,name);
+                        int y; cout << "Tahun: "; cin >> y; cin.ignore();
+                        books.addBook({code,name,y});
+                    }
+                    else if(a == 2) books.displayBooks();
+                    else if(a == 3){
+                        cout << "Kode cari: "; getline(cin,code);
+                        if(books.searchBook(code)) cout << "Ditemukan!\n";
+                        else cout << "Tidak ditemukan\n";
+                    }
+                    else if(a == 4){
+                        cout << "Kode hapus: "; getline(cin,code);
+                        books.deleteBook(code);
+                    }
+                    else if(a == 5) queue.displayQueue();
+                    else if(a == 6){
+                        string mem;
+                        string result = queue.dequeue(mem);
+                        if(result=="") cout << "Antrian kosong\n";
+                        else cout << mem << " meminjam buku " << result << endl;
+                    }
+                } while(a != 0);
+            }
+            else cout << "Login salah!\n";
         }
 
-    } while (menu != 0);
+        // ===== LOGIN MEMBER =====
+        else if(pil == 2){
+            cout << "ID Member: "; getline(cin,id);
+            MemberNode *m = members.searchMember(id);
+            if(!m){
+                cout << "Belum terdaftar! Daftar dulu via menu 3.\n";
+            } else {
+                int mb;
+                do{
+                    cout << "\n--- Menu Member ---\n";
+                    cout << "1. Lihat Buku\n";
+                    cout << "2. Masukkan Buku ke Stack\n";
+                    cout << "3. Ajukan Pinjam (Queue)\n";
+                    cout << "4. Lihat Antrian Saya\n";
+                    cout << "0. Logout\nPilih: ";
+                    cin >> mb; cin.ignore();
 
-    cout << "Program selesai!\n";
+                    if(mb == 1) books.displayBooks();
+                    else if(mb == 2){
+                        cout << "Kode buku: "; getline(cin,code);
+                        if(books.searchBook(code)) stack.push(code);
+                        else cout << "Buku tidak ditemukan\n";
+                    }
+                    else if(mb == 3){
+                        string bk = stack.pop();
+                        if(bk == "") cout << "Stack kosong!\n";
+                        else queue.enqueue(id, bk);
+                    }
+                    else if(mb == 4){
+                        cout << "Antrian Anda:\n";
+                        queue.displayQueueByMember(id);
+                    }
+                } while(mb != 0);
+            }
+        }
+
+        // ===== REGISTER =====
+        else if(pil == 3){
+            cout << "Buat ID: "; getline(cin,id);
+            if(members.searchMember(id)){
+                cout << "ID sudah dipakai!\n";
+            } else {
+                cout << "Nama: "; getline(cin,name);
+                members.registerMember({id,name});
+            }
+        }
+
+        // ===== GUEST VIEW =====
+        else if(pil == 4){
+            books.displayBooks();
+        }
+    }
+
+    cout << "Program selesai.\n";
     return 0;
 }

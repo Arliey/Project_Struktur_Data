@@ -1,163 +1,161 @@
 #include "library.h"
 
-BookList::BookList() { head = tail = NULL; }
-BookList::~BookList() {
-    while (head) {
-        BookNode* p = head;
-        head = head->next;
-        delete p;
-    }
-}
-bool BookList::isEmpty() { return head == NULL; }
+// ===== BOOK DLL =====
+BookList::BookList(){ head = tail = NULL; }
 
-void BookList::insertLast(Book b) {
-    BookNode* node = new BookNode{b, NULL, NULL};
-    if (isEmpty()) {
-        head = tail = node;
-    } else {
+bool BookList::isEmpty(){ return head == NULL; }
+
+void BookList::addBook(Book data){
+    BookNode *node = new BookNode{data, NULL, NULL};
+    if(isEmpty()) head = tail = node;
+    else {
         tail->next = node;
         node->prev = tail;
         tail = node;
     }
-    cout << "Buku ditambahkan!\n";
+    cout << "Buku berhasil ditambahkan!\n";
 }
 
-BookNode* BookList::search(string code) {
-    BookNode* p = head;
-    while (p) {
-        if (p->data.code == code) return p;
+void BookList::displayBooks(){
+    if(isEmpty()) {
+        cout << "Tidak ada buku.\n";
+        return;
+    }
+    BookNode *p = head;
+    while(p){
+        cout << p->data.code << " - " << p->data.title << " (" 
+             << p->data.year << ")\n";
+        p = p->next;
+    }
+}
+
+BookNode* BookList::searchBook(string code){
+    BookNode *p = head;
+    while(p){
+        if(p->data.code == code) return p;
         p = p->next;
     }
     return NULL;
 }
 
-void BookList::remove(string code) {
-    BookNode* p = search(code);
-    if (!p) { cout << "Tidak ditemukan.\n"; return; }
-
-    if (p == head) head = p->next;
-    if (p == tail) tail = p->prev;
-    if (p->prev) p->prev->next = p->next;
-    if (p->next) p->next->prev = p->prev;
+void BookList::deleteBook(string code){
+    BookNode *p = searchBook(code);
+    if(!p){
+        cout << "Buku tidak ditemukan.\n";
+        return;
+    }
+    if(p == head) head = p->next;
+    if(p == tail) tail = p->prev;
+    if(p->prev) p->prev->next = p->next;
+    if(p->next) p->next->prev = p->prev;
     delete p;
-    cout << "Buku dihapus!\n";
+    cout << "Buku berhasil dihapus!\n";
 }
 
-void BookList::display() {
-    if (isEmpty()) { cout << "Belum ada buku.\n"; return; }
 
-    BookNode* p = head;
-    while (p) {
-        cout << p->data.code << " | " << p->data.title << " | " << p->data.year << endl;
-        p = p->next;
-    }
-}
+// ===== MEMBER SLL =====
+MemberList::MemberList(){ head = NULL; }
 
-MemberList::MemberList() { head = NULL; }
-MemberList::~MemberList() {
-    while (head) {
-        MemberNode* p = head;
-        head = head->next;
-        delete p;
-    }
-}
-bool MemberList::isEmpty() { return head == NULL; }
+bool MemberList::isEmpty(){ return head == NULL; }
 
-void MemberList::insertFirst(Member m) {
-    MemberNode* node = new MemberNode{m, head};
+void MemberList::registerMember(Member data){
+    MemberNode *node = new MemberNode{data, head};
     head = node;
-    cout << "Anggota ditambahkan!\n";
+    cout << "Registrasi sukses! ID: " << data.id << endl;
 }
 
-MemberNode* MemberList::search(string id) {
-    MemberNode* p = head;
-    while (p) {
-        if (p->data.id == id) return p;
+MemberNode* MemberList::searchMember(string id){
+    MemberNode *p = head;
+    while(p){
+        if(p->data.id == id) return p;
         p = p->next;
     }
     return NULL;
 }
 
-void MemberList::remove(string id) {
-    MemberNode* p = head;
-    MemberNode* prev = NULL;
-    while (p) {
-        if (p->data.id == id) break;
-        prev = p;
-        p = p->next;
-    }
-    if (!p) { cout << "Tidak ditemukan.\n"; return; }
-
-    if (prev == NULL) head = p->next;
-    else prev->next = p->next;
-    delete p;
-    cout << "Anggota dihapus!\n";
-}
-
-void MemberList::display() {
-    if (isEmpty()) { cout << "Belum ada anggota.\n"; return; }
-    MemberNode* p = head;
-    while (p) {
-        cout << p->data.id << " | " << p->data.name << endl;
+void MemberList::displayMembers(){
+    MemberNode *p = head;
+    while(p){
+        cout << p->data.id << " - " << p->data.name << endl;
         p = p->next;
     }
 }
 
-StackList::StackList() { top = NULL; }
-bool StackList::isEmpty() { return top == NULL; }
 
-void StackList::push(string code) {
-    StackNode* node = new StackNode{code, top};
+// ===== STACK =====
+StackList::StackList(){ top = NULL; }
+
+bool StackList::isEmpty(){ return top == NULL; }
+
+void StackList::push(string code){
+    StackNode *node = new StackNode{code, top};
     top = node;
-    cout << "Buku dimasukkan ke stack.\n";
+    cout << "Buku masuk stack.\n";
 }
 
-string StackList::pop() {
-    if (isEmpty()) return "";
-    StackNode* p = top;
-    string code = p->code;
+string StackList::pop(){
+    if(isEmpty()) return "";
+    StackNode *p = top;
+    string code = p->bookCode;
     top = top->next;
     delete p;
     return code;
 }
 
-void StackList::display() {
-    if (isEmpty()) { cout << "Stack kosong.\n"; return; }
-    StackNode* p = top;
-    while (p) {
-        cout << p->code << endl;
+void StackList::displayStack(){
+    if(isEmpty()) { cout << "Stack kosong.\n"; return; }
+    StackNode *p = top;
+    while(p){
+        cout << p->bookCode << endl;
         p = p->next;
     }
 }
 
-QueueList::QueueList() { front = rear = NULL; }
-bool QueueList::isEmpty() { return front == NULL; }
 
-void QueueList::enqueue(string code) {
-    QueueNode* node = new QueueNode{code, NULL};
-    if (isEmpty()) front = rear = node;
+// ===== QUEUE =====
+QueueList::QueueList(){ front = rear = NULL; }
+
+bool QueueList::isEmpty(){ return front == NULL; }
+
+void QueueList::enqueue(string memberID, string bookCode){
+    QueueNode *node = new QueueNode{memberID, bookCode, NULL};
+    if(isEmpty()) front = rear = node;
     else {
         rear->next = node;
         rear = node;
     }
-    cout << "Masuk antrian!\n";
+    cout << "Permintaan peminjaman masuk antrian.\n";
 }
 
-string QueueList::dequeue() {
-    if (isEmpty()) return "";
-    QueueNode* p = front;
-    string code = p->code;
+string QueueList::dequeue(string &outMember){
+    if(isEmpty()) return "";
+    QueueNode *p = front;
+    string code = p->bookCode;
+    outMember = p->memberID;
     front = front->next;
-    if (!front) rear = NULL;
+    if(!front) rear = NULL;
     delete p;
     return code;
 }
 
-void QueueList::display() {
-    if (isEmpty()) { cout << "Antrian kosong.\n"; return; }
-    QueueNode* p = front;
-    while (p) {
-        cout << p->code << endl;
+void QueueList::displayQueue(){
+    if(isEmpty()) { cout << "Antrian kosong.\n"; return; }
+    QueueNode *p = front;
+    while(p){
+        cout << p->memberID << " → " << p->bookCode << endl;
         p = p->next;
     }
+}
+
+void QueueList::displayQueueByMember(string memberID){
+    QueueNode *p = front;
+    bool found = false;
+    while(p){
+        if(p->memberID == memberID){
+            cout << p->bookCode << endl;
+            found = true;
+        }
+        p = p->next;
+    }
+    if(!found) cout << "Tidak ada antrian.\n";
 }

@@ -5,31 +5,29 @@
 #include <string>
 using namespace std;
 
+// ===== Double Linked List (BOOKS) =====
 struct Book {
-    string code;
-    string title;
+    string code, title;
     int year;
 };
 
 struct BookNode {
     Book data;
-    BookNode* prev;
-    BookNode* next;
+    BookNode *prev, *next;
 };
 
 class BookList {
 public:
-    BookNode* head;
-    BookNode* tail;
+    BookNode *head, *tail;
     BookList();
-    ~BookList();
     bool isEmpty();
-    void insertLast(Book b);
-    BookNode* search(string code);
-    void remove(string code);
-    void display();
+    void addBook(Book data);
+    void displayBooks();
+    BookNode* searchBook(string code);
+    void deleteBook(string code);
 };
 
+// ===== Single Linked List (MEMBERS) =====
 struct Member {
     string id;
     string name;
@@ -37,50 +35,50 @@ struct Member {
 
 struct MemberNode {
     Member data;
-    MemberNode* next;
+    MemberNode *next;
 };
 
 class MemberList {
 public:
-    MemberNode* head;
+    MemberNode *head;
     MemberList();
-    ~MemberList();
     bool isEmpty();
-    void insertFirst(Member m);
-    MemberNode* search(string id);
-    void remove(string id);
-    void display();
+    void registerMember(Member data);
+    MemberNode* searchMember(string id);
+    void displayMembers();
 };
 
+// ===== Stack (BOOK SELECTION) =====
 struct StackNode {
-    string code;
-    StackNode* next;
+    string bookCode;
+    StackNode *next;
 };
 
 class StackList {
 public:
-    StackNode* top;
+    StackNode *top;
     StackList();
     bool isEmpty();
     void push(string code);
     string pop();
-    void display();
+    void displayStack();
 };
 
+// ===== Queue (BORROW REQUEST) =====
 struct QueueNode {
-    string code;
-    QueueNode* next;
+    string memberID, bookCode;
+    QueueNode *next;
 };
 
 class QueueList {
 public:
-    QueueNode* front;
-    QueueNode* rear;
+    QueueNode *front, *rear;
     QueueList();
     bool isEmpty();
-    void enqueue(string code);
-    string dequeue();
-    void display();
+    void enqueue(string memberID, string bookCode);
+    string dequeue(string &outMember);
+    void displayQueue();
+    void displayQueueByMember(string memberID);
 };
 
 #endif
