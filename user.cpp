@@ -1,6 +1,6 @@
 #include "data.h"
 
-/* ====== PINJAM ====== */
+/*PINJAM */
 bool pinjamBuku(MemberNode* m, BookNode* b) {
     if (!m || !b || b->data.dipinjam)
         return false;
@@ -19,7 +19,7 @@ bool pinjamBuku(MemberNode* m, BookNode* b) {
     return true;
 }
 
-/* ====== KEMBALI ====== */
+/*KEMBALI */
 bool kembalikanBuku(MemberNode* m, BookNode* b) {
     LoanNode* curr = m->loanHead;
     LoanNode* prev = NULL;

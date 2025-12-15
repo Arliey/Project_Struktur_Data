@@ -4,10 +4,9 @@
 #include <string>
 using namespace std;
 
-/* forward declaration */
 struct LoanNode;
 
-/* ====== PARENT BUKU ====== */
+/*PARENT BUKU  */
 struct Book {
     string kode;
     string judul;
@@ -20,10 +19,10 @@ struct BookNode {
     LoanNode* loanHead;
 };
 
-/* ====== HEAD BUKU ====== */
+/*HEAD BUKU  */
 extern BookNode* headBook;
 
-/* ====== FUNGSI BUKU ====== */
+/*FUNGSI BUKU */
 BookNode* cariBuku(string kode);
 void tambahBuku(string kode, string judul);
 

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-/* ====== PARENT MEMBER ====== */
+/*PARENT MEMBER */
 struct Member {
     string id;
     string nama;
@@ -19,7 +19,7 @@ struct MemberNode {
     struct LoanNode* loanHead;
 };
 
-/* ====== CHILD MLL ====== */
+/*CHILD MLL */
 struct LoanNode {
     MemberNode* member;
     BookNode* book;
@@ -27,10 +27,9 @@ struct LoanNode {
     LoanNode* nextBook;
 };
 
-/* ====== HEAD MEMBER ====== */
 extern MemberNode* headMember;
 
-/* ====== FUNGSI ====== */
+/*FUNGSI */
 MemberNode* cariMember(string id);
 void tambahMember(string id, string nama);
 

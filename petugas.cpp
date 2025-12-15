@@ -1,10 +1,10 @@
 #include "data.h"
 
-/* ====== GLOBAL HEAD ====== */
+/*GLOBAL HEAD*/
 MemberNode* headMember = NULL;
 BookNode* headBook = NULL;
 
-/* ====== TAMBAH MEMBER ====== */
+/*TAMBAH MEMBER */
 void tambahMember(string id, string nama) {
     MemberNode* baru = new MemberNode;
     baru->data.id = id;
@@ -14,7 +14,7 @@ void tambahMember(string id, string nama) {
     headMember = baru;
 }
 
-/* ====== TAMBAH BUKU ====== */
+/*TAMBAH BUKU */
 void tambahBuku(string kode, string judul) {
     BookNode* baru = new BookNode;
     baru->data.kode = kode;
@@ -25,7 +25,7 @@ void tambahBuku(string kode, string judul) {
     headBook = baru;
 }
 
-/* ====== CARI MEMBER ====== */
+/*CARI MEMBER */
 MemberNode* cariMember(string id) {
     MemberNode* p = headMember;
     while (p) {
