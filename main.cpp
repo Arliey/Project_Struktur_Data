@@ -1,12 +1,9 @@
 #include "data.h"
 
-void menuAdmin();
-void tampilMenu();
-
 int main() {
     int pilih;
     do {
-        tampilMenu();
+        tampilMenuUtama();
         cout << "Pilih: ";
         cin >> pilih;
 
@@ -25,18 +22,10 @@ int main() {
             cout << "ID Member: ";
             cin >> id;
             MemberNode* m = cariMember(id);
-            if (!m) {
+            if (m)
+                menuMember(m);
+            else
                 cout << "Member tidak ditemukan\n";
-            } else {
-                string kode;
-                cout << "Kode Buku: ";
-                cin >> kode;
-                BookNode* b = cariBuku(kode);
-                if (pinjamBuku(m, b))
-                    cout << "Peminjaman berhasil\n";
-                else
-                    cout << "Gagal meminjam\n";
-            }
         }
 
         else if (pilih == 3) {

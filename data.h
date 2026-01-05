@@ -7,7 +7,6 @@
 
 using namespace std;
 
-/*PARENT MEMBER */
 struct Member {
     string id;
     string nama;
@@ -19,7 +18,6 @@ struct MemberNode {
     struct LoanNode* loanHead;
 };
 
-/*CHILD MLL */
 struct LoanNode {
     MemberNode* member;
     BookNode* book;
@@ -29,11 +27,14 @@ struct LoanNode {
 
 extern MemberNode* headMember;
 
-/*FUNGSI */
 MemberNode* cariMember(string id);
 void tambahMember(string id, string nama);
 
 bool pinjamBuku(MemberNode* m, BookNode* b);
 bool kembalikanBuku(MemberNode* m, BookNode* b);
+
+void menuAdmin();
+void menuMember(MemberNode* m);
+void tampilMenuUtama();
 
 #endif

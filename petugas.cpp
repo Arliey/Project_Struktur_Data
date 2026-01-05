@@ -1,10 +1,8 @@
 #include "data.h"
 
-/*GLOBAL HEAD*/
 MemberNode* headMember = NULL;
 BookNode* headBook = NULL;
 
-/*TAMBAH MEMBER */
 void tambahMember(string id, string nama) {
     MemberNode* baru = new MemberNode;
     baru->data.id = id;
@@ -14,18 +12,6 @@ void tambahMember(string id, string nama) {
     headMember = baru;
 }
 
-/*TAMBAH BUKU */
-void tambahBuku(string kode, string judul) {
-    BookNode* baru = new BookNode;
-    baru->data.kode = kode;
-    baru->data.judul = judul;
-    baru->data.dipinjam = false;
-    baru->loanHead = NULL;
-    baru->next = headBook;
-    headBook = baru;
-}
-
-/*CARI MEMBER */
 MemberNode* cariMember(string id) {
     MemberNode* p = headMember;
     while (p) {
@@ -36,7 +22,16 @@ MemberNode* cariMember(string id) {
     return NULL;
 }
 
-/* ====== CARI BUKU ====== */
+void tambahBuku(string kode, string judul) {
+    BookNode* baru = new BookNode;
+    baru->data.kode = kode;
+    baru->data.judul = judul;
+    baru->data.dipinjam = false;
+    baru->loanHead = NULL;
+    baru->next = headBook;
+    headBook = baru;
+}
+
 BookNode* cariBuku(string kode) {
     BookNode* p = headBook;
     while (p) {
@@ -45,4 +40,42 @@ BookNode* cariBuku(string kode) {
         p = p->next;
     }
     return NULL;
+}
+
+/*BookNode* cariBukuJudul(string judul) {
+    BookNode* p = headBook;
+    while (p) {
+        if (p->data.judul == judul)
+            return p;
+        p = p->next;
+    }
+    return NULL;
+}
+*/
+bool updateBuku(string kode, string judulBaru) {
+    BookNode* b = cariBuku(kode);
+    if (!b) return false;
+    b->data.judul = judulBaru;
+    return true;
+}
+
+bool hapusBuku(string kode) {
+    BookNode* curr = headBook;
+    BookNode* prev = NULL;
+
+    while (curr && curr->data.kode != kode) {
+        prev = curr;
+        curr = curr->next;
+    }
+
+    if (!curr || curr->data.dipinjam)
+        return false;
+
+    if (!prev)
+        headBook = curr->next;
+    else
+        prev->next = curr->next;
+
+    delete curr;
+    return true;
 }

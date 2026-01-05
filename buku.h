@@ -6,7 +6,6 @@ using namespace std;
 
 struct LoanNode;
 
-/*PARENT BUKU  */
 struct Book {
     string kode;
     string judul;
@@ -19,11 +18,13 @@ struct BookNode {
     LoanNode* loanHead;
 };
 
-/*HEAD BUKU  */
 extern BookNode* headBook;
 
-/*FUNGSI BUKU */
 BookNode* cariBuku(string kode);
+BookNode* cariBukuJudul(string judul);
+
 void tambahBuku(string kode, string judul);
+bool updateBuku(string kode, string judulBaru);
+bool hapusBuku(string kode);
 
 #endif
